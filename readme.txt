@@ -14,6 +14,8 @@ This plugin is mainly useful if you have not changed the database prefix at the 
 
 As in most of the cases adminer are not changing the wordpress default database table prefix, it is easy for any hackers to inject to your database as all the default tables names are know for all. But if you modify your database tables prefix then your tables names are become unknown to outside world.
 
+Plugin URL: <a href="http://www.youngtechleads.com/change-wordpress-table-prefix/" target="_blank">Change Table Prefix</a>
+
 = Features =
 * Can change database tables prefix in post installation.
 * Tables prefix will change by single click.
