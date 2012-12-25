@@ -4,7 +4,7 @@
  *Description: This plug-in will allow you to change your database prefix after installation.
  *Author: Manish Kumar Agarwal
  *EmailId: manishkrag@yahoo.co.in/manisha@mindfiresolutions.com/skype:mfsi_manish
- *Version: 1.0.0
+ *Version: 1.1
  */
 
 /*Call 'change_prefix' function to Add a submenu link under Profile tab.*/
@@ -101,10 +101,11 @@ function change_prefix_form() {
 				$table_new_name = $table_new_prefix . substr( $table_old_name, $old_prefix_length );
 				
 				//Write query to rename tables name
-				$sql = "RENAME TABLE $table_old_name TO $table_new_name";
+				// $sql = "RENAME TABLE $table_old_name TO $table_new_name";
+				$sql = "RENAME TABLE %s TO %s";
 				
 				//Execute the query
-				if ( false === $wpdb->query($wpdb->prepare($sql)) ) {
+				if ( false === $wpdb->query($wpdb->prepare($sql, $table_old_name, $table_new_name)) ) {
 					$error = 1;
 					echo "<p class='error'>", $table_old_name, " table name not updated.</p>";
 				} else {
