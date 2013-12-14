@@ -3,7 +3,7 @@ Contributors: manishkrag
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=manishkrag@yahoo.co.in&item_name=Change%20Table%20Prefix&return=http://wordpress.org/extend/plugins/change-table-prefix/
 Tags: Prefix,database prefix,wp_,table prefix,random table prefix,custom table prefix, wordpress table prefix, change wordpress table prefix, wordpress database security, how to increase wordpress da security
 Requires at least: 3.0
-Tested up to: 3.7.1
+Tested up to: 3.8
 Stable tag: 1.1
 
 Increase Your Website Database Security
