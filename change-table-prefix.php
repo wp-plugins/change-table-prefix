@@ -4,7 +4,7 @@
  *Description: This plug-in will allow you to change your database prefix after installation.
  *Author: Manish Kumar Agarwal
  *EmailId: manishkrag@yahoo.co.in/manisha@mindfiresolutions.com/skype:mfsi_manish
- *Version: 1.1
+ *Version: 1.2
  */
 
 /*Call 'change_prefix' function to Add a submenu link under Profile tab.*/
@@ -56,7 +56,7 @@ function change_prefix_form() {
 		$old_table_prefix = $table_prefix;
 		$old_prefix_length = strlen( $old_table_prefix );
 		
-		if ( $_POST['checkbox-prefix'] == 1 ) {
+		if ( isset( $_POST['checkbox-prefix'] ) && ( $_POST['checkbox-prefix'] == 1 ) ) {
 			$table_new_prefix = wp_strip_all_tags( trim( $_POST['new-prefix'] ) );
 			global $wpdb;
 			$error = $wpdb->set_prefix( $table_new_prefix );
@@ -83,17 +83,17 @@ function change_prefix_form() {
 		echo "<p class='success'>Your new table prefix is: <b>", $table_new_prefix, "</b></p>";
 		
 		//Get the table resource
-		$result = mysql_list_tables(DB_NAME);
+		$get_tables_sql = 'SHOW TABLES FROM ' . DB_NAME;
+		$old_tables = $wpdb->get_results( $get_tables_sql, ARRAY_N );
 		
 		//Count the number of tables
-		$num_rows = mysql_num_rows( $result );
 		$table_count = 0;
-		
+
 		//Rename all the tables name
-		for ($i = 0; $i < $num_rows; $i++) {
+		foreach ( $old_tables as $old_table ) {
 			
 			//Get table name with old prefix
-			$table_old_name = mysql_tablename($result, $i);
+			$table_old_name = $old_table[0];
 			
 			if ( strpos( $table_old_name, $old_table_prefix ) === 0 ) {
 				
@@ -101,15 +101,13 @@ function change_prefix_form() {
 				$table_new_name = $table_new_prefix . substr( $table_old_name, $old_prefix_length );
 				
 				//Write query to rename tables name
-				// $sql = "RENAME TABLE $table_old_name TO $table_new_name";
-				$sql = "RENAME TABLE %s TO %s";
+				$sql = "RENAME TABLE `$table_old_name` TO `$table_new_name`";
 				
 				//Execute the query
-				if ( false === $wpdb->query($wpdb->prepare($sql, $table_old_name, $table_new_name)) ) {
+				if ( false === $wpdb->query( $sql ) ) {
 					$error = 1;
 					echo "<p class='error'>", $table_old_name, " table name not updated.</p>";
 				} else {
-					//echo "<p class='success'>$table_old_name table name updated to $table_new_name.</p>";
 					$table_count++;
 				}
 			} else {
@@ -124,23 +122,23 @@ function change_prefix_form() {
 		
 		//Update the wp-config.php file
 		$path = '../wp-config.php';
-		$configFile = file($path);
-		foreach ($configFile as $line_num => $line) {
-			switch (substr($line,0,16)) {
+		$configFile = file( $path );
+		foreach ( $configFile as $line_num => $line ) {
+			switch ( substr( $line, 0, 16 ) ) {
 				case '$table_prefix  =':
-					$configFile[$line_num] = str_replace($old_table_prefix, $table_new_prefix, $line);
+					$configFile[$line_num] = str_replace( $old_table_prefix, $table_new_prefix, $line );
 					break;
 			}
 		}
 		
 		//making the the config readable to change the prefix
-		@chmod($path, 0777);
-        if ( is_writeable($path) ) {
-			$handle = fopen($path, 'w');
-			foreach( $configFile as $line ) {
-				fwrite($handle, $line);
+		@chmod( $path, 0777 );
+        if ( is_writeable( $path ) ) {
+			$handle = fopen( $path, 'w' );
+			foreach ( $configFile as $line ) {
+				fwrite( $handle, $line );
 			}
-			fclose($handle);
+			fclose( $handle );
 			
 			echo '<p class="success">wp-config.php file updated successfully.</p>';
 		} else {
@@ -178,7 +176,7 @@ function change_prefix_form() {
 		$meta_keys = $wpdb->get_results( $custom_sql );
 		
 		//Update all the meta_key field value which having the old table prefix in user_meta table
-		foreach ($meta_keys as $meta_key ) {
+		foreach ( $meta_keys as $meta_key ) {
 			
 			//Create new meta key
 			$new_meta_key = $table_new_prefix . substr( $meta_key->meta_key, $old_prefix_length );

@@ -1,10 +1,10 @@
 === Change Table Prefix ===
 Contributors: manishkrag
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=manishkrag@yahoo.co.in&item_name=Change%20Table%20Prefix&return=http://wordpress.org/extend/plugins/change-table-prefix/
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=soumi.das1990@gmail.com&item_name=Change%20Table%20Prefix&return=http://wordpress.org/extend/plugins/change-table-prefix/
 Tags: Prefix,database prefix,wp_,table prefix,random table prefix,custom table prefix, wordpress table prefix, change wordpress table prefix, wordpress database security, how to increase wordpress da security
 Requires at least: 3.0
-Tested up to: 3.8
-Stable tag: 1.1
+Tested up to: 4.2
+Stable tag: 1.2
 
 Increase Your Website Database Security
 
@@ -20,7 +20,7 @@ Plugin URL: <a href="http://www.youngtechleads.com/change-wordpress-table-prefix
 * Can change database tables prefix in post installation.
 * Tables prefix will change by single click.
 * Works well for multi site present in a single database.
-* Both the custom and randum generated prefix facility available.
+* Both the custom and random generated prefix facility available.
 * Minimize the SQL injection.
 
 == Installation ==
@@ -31,5 +31,7 @@ Plugin URL: <a href="http://www.youngtechleads.com/change-wordpress-table-prefix
 
 == Changelog ==
 
+= 1.2 =
+* Fixed issues. Tested with 4.2
 = 1.0 =
 * This is the first version
