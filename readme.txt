@@ -10,7 +10,7 @@ Increase Your Website Database Security
 
 == Description ==
 
-Latest version compatible with WordPress multisite installation <a href="http://www.youngtechleads.com/wordpress-change-table-prefix/">here</a>
+Latest version compatible with WordPress multisite installation <a href="http://www.youngtechleads.com/wordpress-change-table-prefix/">here</a><br/>
 This plugin is mainly useful if you have not changed the database prefix at the time of installation and want to change post installation to make your website more secure and protected from SQL injections. With the use of this plug-in you can easily replace your database default prefix to any other prefix in single click.
 
 As in most of the cases adminer are not changing the WordPress default database table prefix, it is easy for any hackers to inject to your database as all the default tables names are know for all. But if you modify your database tables prefix then your tables names are become unknown to outside world.
