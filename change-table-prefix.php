@@ -4,7 +4,7 @@
  *Description: This plug-in will allow you to change your database prefix after installation.
  *Author: Manish Kumar Agarwal
  *EmailId: manishkrag@yahoo.co.in/manisha@mindfiresolutions.com/skype:mfsi_manish
- *Version: 1.2
+ *Version: 1.3
  */
 
 /*Call 'change_prefix' function to Add a submenu link under Profile tab.*/
@@ -34,7 +34,7 @@ function change_prefix_form() {
 		<p>This plugin will change your database table prefix to protect from SQL Injection attacks.</p>
 		<p><b>Your current table prefix is:</b> <?php echo $table_prefix; ?></p>
 		<p>Your next table prefix will be random generated 5 characters long alpha string followed by underscore(_) if below checkbox unchecked.</p>
-		<p style="color: #ff0000;"><b>Warning:</b> Please be sure to take backup of your databse and wp-config.php file is in writable mode before start table prefix change.</p>
+		<p style="color: #ff0000;"><b>Warning:</b> Please make sure to take backup of your Database and wp-config.php file is in writable mode before start table prefix change.</p>
 			
 		<form id="option-form" method="post" name="change-prefix" action="">
 			<input id="checkbox" type="checkbox" name="checkbox-prefix" value="1"/>
@@ -172,7 +172,7 @@ function change_prefix_form() {
 						FROM " . $table_new_prefix . "usermeta 
 						WHERE meta_key 
 						LIKE '" . $old_table_prefix . "%'";
-		
+
 		$meta_keys = $wpdb->get_results( $custom_sql );
 		
 		//Update all the meta_key field value which having the old table prefix in user_meta table
